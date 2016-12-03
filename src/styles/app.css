@@ -85,7 +85,25 @@ h3 {
     letter-spacing: .5px;
     transition: .2s ease-out;
     cursor: pointer;
+    margin: 5px;
 }
 .btn:hover {
     background-color: #6d8cb0
+}
+
+.photos {
+    margin: 10px;
+}
+.photos .photo {
+    margin: 10px;
+    display: inline-block;
+}
+
+.user .logged {
+    margin: 8px;
+}
+.user .logged a {
+    text-decoration: underline;
+    color: deepskyblue;
+    cursor: pointer;
 }

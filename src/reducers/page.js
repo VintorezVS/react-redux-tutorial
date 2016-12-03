@@ -1,7 +1,7 @@
 import * as pageActions from '../constants/Page';
 
 const initialState = {
-    year: 2016,
+    year: '2016',
     photos: [],
     fetching: false
 };

@@ -4,23 +4,34 @@ import { connect } from 'react-redux';
 import User from '../components/User';
 import Page from '../components/Page';
 import * as pageActions from '../actions/PageActions';
+import * as userActions from '../actions/UserActions';
 
 class App extends Component {
     render() {
         const { user, page } = this.props;
         const { getPhotosByYear } = this.props.pageActions;
+        const { handleLogin, handleLogout } = this.props.userActions;
         return (
             <div className="row">
-                <User name={user.name}/>
                 <Page photos={page.photos} year={page.year} loading={page.fetching} getPhotosByYear={getPhotosByYear}/>
+                <User name={user.name} handleLogin={handleLogin} handleLogout={handleLogout} error={user.error} />
             </div>
         );
     }
 }
 
-export default connect(state => ({
-    user: state.user,
-    page: state.page
-}), dispatch => ({
-    pageActions: bindActionCreators(pageActions, dispatch)
-}))(App);
+function mapStateToProps(state) {
+    return {
+        user: state.user,
+        page: state.page
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        pageActions: bindActionCreators(pageActions, dispatch),
+        userActions: bindActionCreators(userActions, dispatch)
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
