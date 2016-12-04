@@ -2,8 +2,10 @@ import {
     LOGIN_REQUEST,
     LOGIN_SUCCESS,
     LOGIN_FAIL,
-    LOGOUT
+    LOGOUT_SUCCESS
 } from '../constants/User';
+import { push, replace } from 'react-router-redux';
+import { PHOTO, INDEX } from '../constants/Routes';
 
 export function handleLogin(loggedUserId) {
     
@@ -27,11 +29,14 @@ export function handleLogin(loggedUserId) {
 }
 
 export function handleLogout() {
-    VK.Auth.logout();
-    
-    return {
-        type: LOGOUT
-    };
+    return function (dispatch) {
+        VK.Auth.logout(function () {
+            dispatch({
+                type: LOGOUT_SUCCESS
+            });
+            dispatch(push(INDEX));
+        });
+    }
     
 }
 
@@ -42,6 +47,7 @@ function handleLoginResponse(resp, dispatch) {
             type: LOGIN_SUCCESS,
             payload: name
         });
+        dispatch(replace(PHOTO));
     } else {
         dispatch({
             type: LOGIN_FAIL,

@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux'
-import page from './page'
+import photo from './photo'
 import user from './user'
+import { routerReducer } from 'react-router-redux';
 
 export default combineReducers({
-    page,
-    user
+    photo,
+    user,
+    routing: routerReducer
 });

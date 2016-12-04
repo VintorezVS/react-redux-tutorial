@@ -1,17 +1,17 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import App from './containers/App';
-import './styles/app.css';
-import configureStore from './store/configureStore';
+import { Router, browserHistory } from 'react-router';
+import { syncHistoryWithStore } from 'react-router-redux';
+import configureStore from './store/configure';
+import routes from './routes';
 
 const store = configureStore();
+const history = syncHistoryWithStore(browserHistory, store);
 
 render(
     <Provider store={store}>
-        <div className="app">
-            <App />
-        </div>
+        <Router history={history} routes={routes} />
     </Provider>,
     document.getElementById('root')
 );
